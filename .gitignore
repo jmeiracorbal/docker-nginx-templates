@@ -1,2 +1,4 @@
-data/certbot/conf
+data/certbot/conf/*
 !data/certbot/conf/.gitkeep
+data/certbot/www/*
+!data/certbot/www/.gitkeep
