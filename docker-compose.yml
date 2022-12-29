@@ -2,7 +2,10 @@ version: '3'
 services:
 
   nginx:
-    image: nginx:stable-alpine
+    # image: nginx:stable-alpine
+    container_name: nginx
+    build: ./docker/nginx
+    image: nginx-www-data
     restart: unless-stopped
     ports:
       - "80:80"
@@ -25,4 +28,5 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     volumes:
       - ./certbot/conf:/etc/letsencrypt
+      # .well-known directory?
       - ./certbot/www:/var/www/certbot

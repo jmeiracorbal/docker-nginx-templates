@@ -5,3 +5,6 @@ certbot/www/*
 
 log/nginx/*
 !log/nginx/.gitkeep
+
+log/letsencrypt/*
+!log/letsencrypt/.gitkeep

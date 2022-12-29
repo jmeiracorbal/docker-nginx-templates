@@ -60,5 +60,8 @@ nginx
 
 # Reference
 
-* [pentacent letsencrypt docker](https://pentacent.medium.com/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71)
+* [Pentacent letsencrypt docker](https://pentacent.medium.com/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71)
 * [h5bp server configs for servers](https://github.com/h5bp/server-configs-nginx.git)
+* [Fix error user www-data: getpwnam("www") failed in /etc/nginx/nginx.conf](http://blog.tobiasforkel.de/en/2016/09/10/nginx-docker-container-and-getpwnamwww-data-problem/)
+* [Build docker container from docker image](https://docs.docker.com/compose/compose-file/build/#illustrative-sample)
+* [Wrong permissions in volume in Docker container](https://stackoverflow.com/a/59879136)
