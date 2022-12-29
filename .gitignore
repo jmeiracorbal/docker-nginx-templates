@@ -1,4 +1,7 @@
-data/certbot/conf/*
-!data/certbot/conf/.gitkeep
-data/certbot/www/*
-!data/certbot/www/.gitkeep
+certbot/conf/*
+!certbot/conf/.gitkeep
+certbot/www/*
+!certbot/www/.gitkeep
+
+log/nginx/*
+!log/nginx/.gitkeep

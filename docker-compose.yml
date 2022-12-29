@@ -2,7 +2,7 @@ version: '3'
 services:
 
   nginx:
-    image: nginx:1.15-alpine
+    image: nginx:stable-alpine
     restart: unless-stopped
     ports:
       - "80:80"
@@ -10,10 +10,13 @@ services:
     # reload every 6 hours when nginx renovation will be needed
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     volumes:
-      - ./data/nginx:/etc/nginx/conf.d
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-      - ./app:/app
+      # reemplazamos la instalación de nginx
+      - ./nginx:/etc/nginx
+      # conectamos los certificados con el host
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - ./log/nginx:/var/log/nginx
+      - ./apps:/usr/share/nginx/html
 
   certbot:
     image: certbot/certbot
@@ -21,5 +24,5 @@ services:
     # automatic check renovation needed every 12 hours
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
