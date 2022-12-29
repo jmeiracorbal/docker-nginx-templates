@@ -9,7 +9,7 @@ If you need to create a letsencrypt certs with certbot this projects uses a modi
 * A server with internet access over the installation is made.
 * Don't touch the project structure except `templates`
 
-## Create certs
+## Create web containers with letsencrypt
 
 Domain DNS services must be configured previously. Certbot makes a certificate requesting... If you don't have any, certbot launch an error:
 Example with app.xyz without any DNS Server configured previously:
@@ -38,13 +38,20 @@ ERROR: 1
 This repository has the following structure based on h5bp nginx but h5bp has snippets was moved to custom.d folder:
 
 ```text
-./nginx
+certbot
+└── .../
+log
+└── ./nginx
+templates
+└── .../
+docker-compose.yml
+nginx
 ├── custom.d/
-│   ├── default.conf
-│   └── h5bp/
-│       ├── basic.conf
-│       ├── location/
-│       └── .../
+│   └── default.conf
+├── h5bp/
+│   ├── basic.conf
+│   ├── location/
+│   └── .../
 ├── conf.d/
 │   └── .../
 ├── mime.types
