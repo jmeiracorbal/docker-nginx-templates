@@ -14,6 +14,10 @@ If you need to create a letsencrypt certs with certbot this projects uses a modi
 Domain DNS services must be configured previously. Certbot makes a certificate requesting... If you don't have any, certbot launch an error:
 Example with app.xyz without any DNS Server configured previously:
 
+$ `./letsencrypt app.xyz www.app.xyz` # we can add more domains
+
+If server DNS is not config correctly or without internet access:
+
 ```text
 Requesting a certificate for app.xyz (change app.xyz by your domain)
 
@@ -29,9 +33,23 @@ Ask for help or search for solutions at https://community.letsencrypt.org. See t
 ERROR: 1
 ```
 
-## Create letsencrypt certs
+## Project structure
 
-Its needed to create dummy certificate for domains: `./init-letsencrypt.sh mydomain.xyz www.mydomain.xyz`
+This repository has the following structure based on h5bp nginx but h5bp has snippets was moved to custom.d folder:
+
+```text
+./nginx
+├── custom.d/
+│   ├── default.conf
+│   └── h5bp/
+│       ├── basic.conf
+│       ├── location/
+│       └── .../
+├── conf.d/
+│   └── .../
+├── mime.types
+└── nginx.conf
+```
 
 # Reference
 
