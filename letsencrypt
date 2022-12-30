@@ -7,7 +7,7 @@ fi
 
 # domains=(example.org www.example.org)
 if [ -z "$1" ]; then
-    echo "Without domains any certs can be created. ./init-letsencrypt.sh domain www.domain..." && exit
+    echo "Without domains any certs can be created. ./letsencrypt domain www.domain..." && exit
 fi
 
 # required domains by arg
@@ -73,6 +73,7 @@ esac
 # Enable staging mode if needed
 if [ $staging != "0" ]; then staging_arg="--staging"; fi
 
+# create keys for .well-known
 docker-compose run --rm --entrypoint "\
   certbot certonly --webroot -w /var/www/certbot \
     $staging_arg \
