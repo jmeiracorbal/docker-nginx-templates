@@ -34,6 +34,68 @@ Ask for help or search for solutions at https://community.letsencrypt.org. See t
 ERROR: 1
 ```
 
+You need *.conf server files to include https certs:
+
+* ssl_certificate /etc/letsencrypt/live/example.org/fullchain.pem;
+* ssl_certificate_key /etc/letsencrypt/live/example.org/privkey.pem;
+
+Optional, you can add more nginx options based on ssl:
+* include /etc/letsencrypt/options-ssl-nginx.conf;
+* ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+Add this options on 443 server.
+
+On the 80 port server add well-known validations:
+
+```text
+location /.well-known/acme-challenge/ {
+    root /var/www/certbot;
+}
+```
+
+A complete server conf file using with ssl:
+
+```text
+server {
+
+    listen 80 default_server;
+    # This will match any hostname
+    server_name _;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+}
+
+server {
+
+    listen 443 ssl;
+    server_name example.org;
+
+    error_log  /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+    root /var/www/html/public;
+
+    ssl_certificate /etc/letsencrypt/live/example.org/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.org/privkey.pem;
+
+    # nginx service validation: https://www.ssllabs.com/index.html
+    # require run ./init-letsencrypt.sh
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location / {
+        proxy_pass http://example.org; #for demo purposes
+    }
+
+}
+```
+
 ## Project structure
 
 This repository has the following structure based on h5bp nginx but h5bp has snippets was moved to custom.d folder:
