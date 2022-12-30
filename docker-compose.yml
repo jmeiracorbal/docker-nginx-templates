@@ -2,10 +2,10 @@ version: '3'
 services:
 
   nginx:
-    # image: nginx:stable-alpine
-    container_name: nginx
-    build: ./docker/nginx
-    image: nginx-www-data
+    # image: nginx:stable-alpine has an error because www-data user is not created on the default image
+    container_name: nginx-alpine-server
+    build: ./docker/nginx-alpine
+    image: nginx-alpine-server
     restart: unless-stopped
     ports:
       - "80:80"
@@ -17,9 +17,11 @@ services:
       - ./nginx:/etc/nginx
       # conectamos los certificados con el host
       - ./certbot/conf:/etc/letsencrypt
+      # .well-known directory keys
       - ./certbot/www:/var/www/certbot
       - ./log/nginx:/var/log/nginx
-      - ./apps:/usr/share/nginx/html
+      # apps directory depends on conf.d files to link to this directory
+      - ./apps:/var/www/apps
 
   certbot:
     image: certbot/certbot
@@ -28,5 +30,5 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     volumes:
       - ./certbot/conf:/etc/letsencrypt
-      # .well-known directory?
+      # .well-known directory
       - ./certbot/www:/var/www/certbot

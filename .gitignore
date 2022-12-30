@@ -8,3 +8,9 @@ log/nginx/*
 
 log/letsencrypt/*
 !log/letsencrypt/.gitkeep
+
+nginx/conf.d/*
+!nginx/conf.d/.gitkeep
+
+nginx/custom.d/*
+!nginx/custom.d/.gitkeep

@@ -8,6 +8,7 @@ If you need to create a letsencrypt certs with certbot this projects uses a modi
 * Domain DNS Server with internet access.
 * A server with internet access over the installation is made.
 * Don't touch the project structure except `templates`
+* Domain name does end with a valid public suffix (TLD)
 
 ## Create web containers with letsencrypt
 
@@ -58,6 +59,9 @@ nginx
 └── nginx.conf
 ```
 
+* custom.d: directives to complete nginx configuration. No server configuration.
+* conf.d: encapsulated configuration. Example server {...} to define vhosts.
+
 # Reference
 
 * [Pentacent letsencrypt docker](https://pentacent.medium.com/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71)
@@ -65,3 +69,4 @@ nginx
 * [Fix error user www-data: getpwnam("www") failed in /etc/nginx/nginx.conf](http://blog.tobiasforkel.de/en/2016/09/10/nginx-docker-container-and-getpwnamwww-data-problem/)
 * [Build docker container from docker image](https://docs.docker.com/compose/compose-file/build/#illustrative-sample)
 * [Wrong permissions in volume in Docker container](https://stackoverflow.com/a/59879136)
+* [How to Redirect HTTP to HTTPS in Nginx](https://phoenixnap.com/kb/redirect-http-to-https-nginx)
