@@ -70,3 +70,4 @@ nginx
 * [Build docker container from docker image](https://docs.docker.com/compose/compose-file/build/#illustrative-sample)
 * [Wrong permissions in volume in Docker container](https://stackoverflow.com/a/59879136)
 * [How to Redirect HTTP to HTTPS in Nginx](https://phoenixnap.com/kb/redirect-http-to-https-nginx)
+* [Workdir for docker-compose](https://stackoverflow.com/a/43290357)
