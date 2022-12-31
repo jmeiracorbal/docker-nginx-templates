@@ -9,3 +9,6 @@ RUN set -x ; \
   adduser -u 82 -D -S -G www-data www-data && exit 0 ; exit 1
 
 RUN apk add shadow && usermod -u 1000 www-data && groupmod -g 1000 www-data
+
+# add to link to modules folder
+RUN ln -s /etc/nginx/modules /usr/lib/nginx/modules

@@ -1,7 +1,10 @@
 version: '3'
 
+# use custom network to prevent add prefix to the network
 networks:
   nginx-server:
+    name: nginx-server
+    driver: bridge
 
 services:
 
