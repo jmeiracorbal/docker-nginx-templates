@@ -2,8 +2,8 @@ version: '3'
 
 # use custom network to prevent add prefix to the network
 networks:
-  nginx-server:
-    name: nginx-server
+  nginx-alpine-network:
+    name: nginx-alpine-network
     driver: bridge
 
 services:
@@ -28,10 +28,11 @@ services:
       # .well-known directory keys
       - ./certbot/www:/var/www/certbot
       - ./log/nginx:/var/log/nginx
+      - ./log/letsencrypt:/var/log/letsencrypt
       # apps directory depends on conf.d files to link to this directory
       - ./apps:/var/www/apps
     networks:
-      - nginx-server
+      - nginx-alpine-network
     depends_on:
       - certbot
 
@@ -48,7 +49,7 @@ services:
       # .well-known directory
       - ./certbot/www:/var/www/certbot
     networks:
-      - nginx-server
+      - nginx-alpine-network
 
   # add profiles to deploy another containers working with nginx
   # docker compose --profile php up
@@ -63,4 +64,4 @@ services:
     volumes:
       - ./apps:/var/www/apps
     networks:
-      - nginx-server
+      - nginx-alpine-network
