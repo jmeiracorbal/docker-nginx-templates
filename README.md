@@ -133,3 +133,4 @@ nginx
 * [Wrong permissions in volume in Docker container](https://stackoverflow.com/a/59879136)
 * [How to Redirect HTTP to HTTPS in Nginx](https://phoenixnap.com/kb/redirect-http-to-https-nginx)
 * [Workdir for docker-compose](https://stackoverflow.com/a/43290357)
+* [Assigning profiles to services on docker compose](https://docs.docker.com/compose/profiles/#assigning-profiles-to-services)

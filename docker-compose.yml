@@ -33,7 +33,9 @@ services:
       - certbot
 
   certbot:
-    image: certbot/certbot
+    container_name: nginx-alpine-certbot
+    image: nginx-alpine-certbot
+    build: ./docker/certbot
     restart: unless-stopped
     # automatic check renovation needed every 12 hours
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
@@ -42,5 +44,20 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       # .well-known directory
       - ./certbot/www:/var/www/certbot
+    networks:
+      - nginx-server
+
+  # add profiles to deploy another containers working with nginx
+  # docker compose --profile php up
+  php:
+    profiles:
+      - php
+    image: nginx-alpine-php
+    build: ./docker/php/7.4-fpm-alpine
+    container_name: nginx-alpine-php
+    ports:
+      - "9001:9000"
+    volumes:
+      - ./apps:/var/www/apps
     networks:
       - nginx-server
